@@ -1,16 +1,22 @@
-import testIMG from "../../shared/img.png";
+import {Link} from "react-router-dom";
 
-const UserCard = () => {
+interface UserInterface {
+    id: number,
+    avatar: string,
+    email: string,
+    first_name: string,
+    last_name: string,
+}
+
+const UserCard = ({item}) => {
+
     return (
-        <div className="w-80 h-64 flex shadow-2xl rounded-2xl p-5 flex-wrap justify-center">
+        <Link to={`/user/${item.id}`} className="w-80 h-64 flex shadow-2xl rounded-2xl p-5 flex-wrap justify-center cursor-pointer">
             <div className="w-full flex justify-center flex-wrap">
-                <img src={testIMG} className="rounded-full w-32 h-32" alt=""/>
-                <h3 className="w-full text-center">Артур Королев</h3>
+                <img src={item.avatar} className="rounded-full w-32 h-32" alt=""/>
+                <h3 className="w-full text-center">{item.first_name} {item.last_name}</h3>
             </div>
-            <div className="w-full flex justify-end">
-                Like
-            </div>
-        </div>
+        </Link>
     );
 };
 

@@ -4,7 +4,7 @@ import {useAppDispatch} from "../shared/hooks/redux.ts";
 import {useEffect} from "react";
 import {fetchData} from "./store/reducers/ActionCreator.ts";
 
-export function App() {
+const App = () => {
 
     const dispatch = useAppDispatch()
 
@@ -13,8 +13,10 @@ export function App() {
     }, []);
 
   return (
-      <div class="overflow-x-hidden">
+      <div className="overflow-x-hidden">
         <RouterProvider router={router}/>
       </div>
   )
 }
+
+export default App

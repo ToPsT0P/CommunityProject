@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-interface user {
+interface IUser {
     id: number,
     email: string,
     first_name: string,
@@ -10,7 +10,7 @@ interface user {
 
 interface communityUsers {
     page: number,
-    data: user[]
+    data: IUser[]
 
 }
 
@@ -25,9 +25,12 @@ export const communityUsersSlice = createSlice({
     name: "community",
     initialState,
     reducers: {
-        setData(state, action: PayloadAction<user[]>) {
+        setData(state, action: PayloadAction<IUser[]>) {
             state.data = action.payload
         },
+        setPage(state, action: PayloadAction<number>){
+            state.page = action.payload
+        }
     }
 })
 

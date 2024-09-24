@@ -1,5 +1,13 @@
-import { render } from 'preact'
-import { App } from './app/app.tsx'
+import { createRoot } from 'react-dom/client'
 import './index.css'
+import {Provider} from "react-redux";
+import {setupStore} from "./app/store/store.ts";
+import App from "../src/app/App.tsx";
 
-render(<App />, document.getElementById('app')!)
+const store = setupStore()
+
+createRoot(document.getElementById('root')!).render(
+    <Provider store={store}>
+        <App/>
+    </Provider>
+)
