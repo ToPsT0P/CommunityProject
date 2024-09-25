@@ -17,10 +17,14 @@ export const userSlice = createSlice({
     reducers: {
         setToken(state, action: PayloadAction<string>) {
             state.Token = action.payload
+        //     TODO Не забыть записывать токен в localStorage
         },
 
         setLoginState(state, action: PayloadAction<boolean>) {
             state.isLogin = action.payload
+        },
+        isLogin(state, action: PayloadAction<string>){
+        //     TODO Логика проверки ключа к серверу если верный, то логиним
         }
     }
 })

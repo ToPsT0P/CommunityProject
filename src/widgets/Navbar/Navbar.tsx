@@ -1,9 +1,20 @@
+import {useAppSelector} from "../../shared/hooks/redux.ts";
+import {Link} from "react-router-dom";
 
 const Navbar = () => {
+
+    const { isLogin } = useAppSelector(state => state.userReducer)
+
     return (
         <div className="w-screen h-64 bg-myColor flex flex-wrap">
             <div className="w-screen px-8 py-3 h-fit flex justify-end">
-                <button className="w-20 h-10 bg-myColor rounded-xl border-2 border-white text-white">Выход</button>
+                {isLogin == true
+                    ?
+                    <button className="w-20 h-10 bg-myColor rounded-xl border-2 border-white text-white">Выход</button>
+                    :
+                    <Link to={"/signIn"} className="w-20 h-10 bg-myColor rounded-xl border-2 border-white text-white flex justify-center items-center hover:shadow-2xl duration-200">Войти</Link>
+                }
+
             </div>
             <div className="text-white flex flex-wrap justify-center pb-5">
                 <h1 className="text-6xl w-full justify-center flex h-fit">Наша команда</h1>

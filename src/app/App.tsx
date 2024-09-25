@@ -9,7 +9,7 @@ const App = () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchData())
+        dispatch(fetchData(1))
     }, []);
 
   return (

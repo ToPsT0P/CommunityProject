@@ -11,6 +11,7 @@ export default {
       black: "rgba(0, 0, 0, 1)",
       gray: "rgba(248, 248, 248, 1)",
       myPurple: "rgba(81, 38, 137, 1)",
+      errorColor: "#ED4337"
     },
     extend: {},
   },
