@@ -17,6 +17,7 @@ export const userSlice = createSlice({
     reducers: {
         setToken(state, action: PayloadAction<string>) {
             state.Token = action.payload
+
         //     TODO Не забыть записывать токен в localStorage
         },
 

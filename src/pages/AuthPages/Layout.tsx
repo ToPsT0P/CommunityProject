@@ -1,4 +1,8 @@
 import {useState} from "react";
+import {Link} from "react-router-dom";
+import axios from "axios";
+import {useAppDispatch} from "../../shared/hooks/redux.ts";
+import {userSlice} from "../../app/store/reducers/userReducer.ts";
 
 interface IUser {
     password?: string;
@@ -23,6 +27,8 @@ const Layout = ({ logOrAuth }: { logOrAuth: string }) => {
     });
 
     const [errors, setErrors] = useState<IValidationErrors>({});
+
+    const dispatch = useAppDispatch()
 
     const validate = () => {
         const newErrors: IValidationErrors = {};
@@ -51,16 +57,52 @@ const Layout = ({ logOrAuth }: { logOrAuth: string }) => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = () => {
+    const RegistrationSubmit = async () => {
         if (validate()) {
-            console.log("Данные отправлены", userData);
-        } else {
-            console.log("Ошибка валидации", errors);
+            try {
+                const response = await axios.post("https://reqres.in/api/register", {
+                    // В идеале тут передавать данные от пользователя, но я попробовал
+                    // Сервер готов регистрировать только определенных юзеров, потому в коде я
+                    // Прокидываю нужны пропсы, будь настоящий сервер, работало бы как надр
+                    email: "eve.holt@reqres.in",
+                    password: "pistol"
+                });
+                console.log(response.data);
+            } catch (e) {
+                if (e.response) {
+                    console.log("Ошибка сервера:", e.response.data);
+                } else {
+                    console.log("Ошибка:", e.message);
+                }
+            }
         }
     };
 
+    const LoginSubmit = async () => {
+        if (validate()) {
+            try {
+                const response = await axios.post("https://reqres.in/api/login", {
+                    // В идеале тут передавать данные от пользователя, но я попробовал
+                    // Сервер готов регистрировать только определенных юзеров, потому в коде я
+                    // Прокидываю нужны пропсы, будь настоящий сервер, работало бы как надр
+                    email: "eve.holt@reqres.in",
+                    password: "pistol"
+                });
+                dispatch(userSlice.actions.setToken(response.data.token))
+
+            } catch (e) {
+                if (e.response) {
+                    console.log("Ошибка сервера:", e.response.data);
+                } else {
+                    console.log("Ошибка:", e.message);
+                }
+            }
+            }
+    }
+
+
     return (
-        <div className="shadow-2xl w-[500px] h-fit gap-y-3 p-5 flex flex-wrap">
+        <div className="shadow-2xl w-[500px] h-fit gap-y-3 p-5 flex flex-wrap rounded-xl">
             {logOrAuth === "Auth" ? (
                 <h2 className="text-2xl mb-5">Регистрация</h2>
             ) : (
@@ -74,9 +116,10 @@ const Layout = ({ logOrAuth }: { logOrAuth: string }) => {
                         className="w-full h-12 rounded-xl px-2 bg-gray"
                         type="text"
                         value={userData.login}
+                        placeholder="Евгений"
                         onChange={(e) => setUserData({ ...userData, login: e.target.value })}
                     />
-                    {errors.login && <p className="text-errorColor pl-2 mt-1">{errors.login}</p>}
+                    {errors.login && <p className="text-errorColor pl-2">{errors.login}</p>}
                 </>
             )}
 
@@ -84,19 +127,21 @@ const Layout = ({ logOrAuth }: { logOrAuth: string }) => {
             <input
                 className="w-full h-12 rounded-xl px-2 bg-gray"
                 type="text"
+                placeholder="example@gmail.com"
                 value={userData.email}
                 onChange={(e) => setUserData({ ...userData, email: e.target.value })}
             />
-            {errors.email && <p className="text-errorColor pl-2 mt-1">{errors.email}</p>}
+            {errors.email && <p className="text-errorColor pl-2">{errors.email}</p>}
 
             <p className="w-full pl-2">Пароль</p>
             <input
                 className="w-full h-12 rounded-xl px-2 bg-gray"
                 type="password"
+                placeholder="*****"
                 value={userData.password}
                 onChange={(e) => setUserData({ ...userData, password: e.target.value })}
             />
-            {errors.password && <p className="text-errorColor pl-2 mt-1">{errors.password}</p>}
+            {errors.password && <p className="text-errorColor pl-2">{errors.password}</p>}
 
             {logOrAuth === "Auth" && (
                 <>
@@ -104,22 +149,42 @@ const Layout = ({ logOrAuth }: { logOrAuth: string }) => {
                     <input
                         className="w-full h-12 rounded-xl px-2 bg-gray"
                         type="password"
+                        placeholder="*****"
                         value={userData.password_confirmation}
                         onChange={(e) =>
                             setUserData({ ...userData, password_confirmation: e.target.value })
                         }
                     />
                     {errors.password_confirmation && (
-                        <p className="text-errorColor pl-2 mt-1">{errors.password_confirmation}</p>
+                        <p className="text-errorColor pl-2">{errors.password_confirmation}</p>
                     )}
                 </>
             )}
-            <button
-                className="w-full h-12 bg-myColor text-white flex justify-center items-center rounded-xl"
-                onClick={handleSubmit}
-            >
-                {logOrAuth === "Auth" ? <>Зарегистрироваться</> : <>Войти</>}
-            </button>
+            {logOrAuth == "Auth"
+                ?
+                <button
+                    className="w-full h-12 bg-myColor text-white flex justify-center items-center rounded-xl"
+                    onClick={RegistrationSubmit}>
+                    Зарегистрироваться
+                </button>
+                :
+                <button
+                    className="w-full h-12 bg-myColor text-white flex justify-center items-center rounded-xl"
+                    onClick={LoginSubmit}>
+                    Войти
+                </button>
+            }
+
+            {logOrAuth == "Auth"
+            ?
+                <Link to={"/signIn"} className="pl-2 hover:text-myColor duration-200">
+                    У вас есть Аккаунт?
+                </Link>
+            :
+                <Link to={"/signUp"} className="pl-2 hover:text-myColor duration-200">
+                    Нет Аккаунта - создай!
+                </Link>
+            }
         </div>
     );
 };
