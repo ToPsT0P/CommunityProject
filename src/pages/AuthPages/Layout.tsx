@@ -67,7 +67,8 @@ const Layout = ({ logOrAuth }: { logOrAuth: string }) => {
                     email: "eve.holt@reqres.in",
                     password: "pistol"
                 });
-                console.log(response.data);
+                dispatch(userSlice.actions.setToken(response.data.token))
+                
             } catch (e) {
                 if (e.response) {
                     console.log("Ошибка сервера:", e.response.data);

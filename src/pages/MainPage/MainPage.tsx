@@ -8,11 +8,11 @@ import {fetchData} from "../../app/store/reducers/ActionCreator.ts";
 const MainPage = () => {
 
     const { data, page } = useAppSelector(state => state.communityReducer)
-
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(fetchData(page))
+
     }, [page]);
 
     return (

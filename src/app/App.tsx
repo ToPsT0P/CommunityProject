@@ -3,6 +3,7 @@ import {router} from "./router/router.tsx";
 import {useAppDispatch} from "../shared/hooks/redux.ts";
 import {useEffect} from "react";
 import {fetchData} from "./store/reducers/ActionCreator.ts";
+import {userSlice} from "./store/reducers/userReducer.ts";
 
 const App = () => {
 
@@ -10,6 +11,7 @@ const App = () => {
 
     useEffect(() => {
         dispatch(fetchData(1))
+        dispatch(userSlice.actions.isLogin(""))
     }, []);
 
   return (

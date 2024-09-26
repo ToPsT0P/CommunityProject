@@ -17,15 +17,19 @@ export const userSlice = createSlice({
     reducers: {
         setToken(state, action: PayloadAction<string>) {
             state.Token = action.payload
-
-        //     TODO Не забыть записывать токен в localStorage
+            localStorage.setItem("token", action.payload)
         },
 
-        setLoginState(state, action: PayloadAction<boolean>) {
+        setLoginStateOff(state, action: PayloadAction<boolean>) {
             state.isLogin = action.payload
+            localStorage.removeItem("token")
         },
         isLogin(state, action: PayloadAction<string>){
-        //     TODO Логика проверки ключа к серверу если верный, то логиним
+            // Тут логика проверки токена, но reqres.in не позволяет сделать проверку токена потому костыль
+            console.log(action)
+            if(localStorage.getItem("token")){
+                state.isLogin = true
+            }
         }
     }
 })
