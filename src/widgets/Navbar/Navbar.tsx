@@ -2,7 +2,10 @@ import {useAppDispatch, useAppSelector} from "../../shared/hooks/redux.ts";
 import {Link} from "react-router-dom";
 import {userSlice} from "../../app/store/reducers/userReducer.ts";
 
-const Navbar = () => {
+
+
+//TODO Сделать интерфейс Навбара
+const Navbar = (state) => {
 
     const { isLogin } = useAppSelector(state => state.userReducer)
     const dispatch = useAppDispatch();
