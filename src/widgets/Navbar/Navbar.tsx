@@ -11,7 +11,7 @@ const Navbar = (state) => {
     const dispatch = useAppDispatch();
 
     return (
-        <div className="w-screen h-72 bg-myColor flex flex-wrap pb-5">
+        <div className="w-screen h-72 bg-myColor flex flex-wrap pb-5 justify-center">
             <div className="w-screen px-8 py-3 h-fit flex justify-end">
                 {isLogin == true
                     ?
