@@ -3,9 +3,7 @@ import {Link} from "react-router-dom";
 import {userSlice} from "../../app/store/reducers/userReducer.ts";
 
 
-
-//TODO Сделать интерфейс Навбара
-const Navbar = (state) => {
+const Navbar = () => {
 
     const { isLogin } = useAppSelector(state => state.userReducer)
     const dispatch = useAppDispatch();

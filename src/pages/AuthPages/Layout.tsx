@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {useAppDispatch} from "../../shared/hooks/redux.ts";
 import {userSlice} from "../../app/store/reducers/userReducer.ts";
@@ -28,6 +28,7 @@ const Layout = ({ logOrAuth }: { logOrAuth: string }) => {
 
     const [errors, setErrors] = useState<IValidationErrors>({});
 
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
 
     const validate = () => {
@@ -68,7 +69,7 @@ const Layout = ({ logOrAuth }: { logOrAuth: string }) => {
                     password: "pistol"
                 });
                 dispatch(userSlice.actions.setToken(response.data.token))
-                
+                navigate("/")
             } catch (e) {
                 if (e.response) {
                     console.log("Ошибка сервера:", e.response.data);
@@ -90,6 +91,7 @@ const Layout = ({ logOrAuth }: { logOrAuth: string }) => {
                     password: "pistol"
                 });
                 dispatch(userSlice.actions.setToken(response.data.token))
+                navigate("/")
 
             } catch (e) {
                 if (e.response) {
