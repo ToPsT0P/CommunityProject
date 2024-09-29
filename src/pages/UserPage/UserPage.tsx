@@ -21,7 +21,7 @@ const UserPage = () => {
     const [currentUser, setCurrentUser] = useState<ICurrentUser>()
 
     const currentUserFetching = async () => {
-        const id = window.location.pathname.split("/")[2]
+        const id = window.location.pathname.split("/")[3]
         const response = await axios.get(`https://reqres.in/api/users/${id}`)
         setCurrentUser(response.data.data)
     }
@@ -35,7 +35,7 @@ const UserPage = () => {
         <div className="w-screen h-screen">
             <div className="w-screen h-72 bg-myColor flex flex-wrap pb-5 justify-center navbar">
                 <div className="w-screen px-8 py-3 h-fit flex justify-between">
-                    <Link to={"/"}
+                    <Link to={"/CommunityProject"}
                           className="w-20 h-10 bg-myColor rounded-xl border-2 border-white text-white flex justify-center items-center">
                         Назад
                     </Link>

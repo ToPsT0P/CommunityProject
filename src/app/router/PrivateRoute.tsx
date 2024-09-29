@@ -9,7 +9,7 @@ const PrivateRoute = ({ children }: { children: JSX.Element }) => {
     const { isLogin } = useAppSelector(state => state.userReducer);
 
     if (!isLogin) {
-        return <Navigate to="/signIn" />;
+        return <Navigate to="/CommunityProject/signIn" />;
     }
 
     return children;
