@@ -8,7 +8,7 @@ import PrivateRoute from "./PrivateRoute.tsx";
 
 export const router = createBrowserRouter([
     {
-        path: "/",
+        path: "/CommunityProject",
         element: (
             <PrivateRoute>
                 <MainPage />
@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
-        path: "/user/:id",
+        path: "/CommunityProject/user/:id",
         element: (
             <PrivateRoute>
                 <UserPage />
@@ -25,11 +25,11 @@ export const router = createBrowserRouter([
         )
     },
     {
-        path: "/signIn",
+        path: "/CommunityProject/signIn",
         element: <LoginPage />
     },
     {
-        path: "/signUp",
+        path: "/CommunityProject/signUp",
         element: <RegistrationPage />
     }
 ]);

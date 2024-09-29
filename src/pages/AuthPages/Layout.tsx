@@ -69,7 +69,7 @@ const Layout = ({ logOrAuth }: { logOrAuth: string }) => {
                     password: "pistol"
                 });
                 dispatch(userSlice.actions.setToken(response.data.token))
-                navigate("/")
+                navigate("/CommunityProject")
             } catch (e) {
                 if (e.response) {
                     console.log("Ошибка сервера:", e.response.data);
@@ -91,7 +91,7 @@ const Layout = ({ logOrAuth }: { logOrAuth: string }) => {
                     password: "pistol"
                 });
                 dispatch(userSlice.actions.setToken(response.data.token))
-                navigate("/")
+                navigate("/CommunityProject")
 
             } catch (e) {
                 if (e.response) {

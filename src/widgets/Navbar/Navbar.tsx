@@ -15,7 +15,7 @@ const Navbar = () => {
                     ?
                     <button onClick={() => {dispatch(userSlice.actions.setLoginStateOff(false))}} className="w-20 h-10 bg-myColor rounded-xl border-2 border-white text-white">Выход</button>
                     :
-                    <Link to={"/signIn"} className="w-20 h-10 bg-myColor rounded-xl border-2 border-white text-white flex justify-center items-center hover:shadow-2xl duration-200">Войти</Link>
+                    <Link to={"/CommunityProject/signIn"} className="w-20 h-10 bg-myColor rounded-xl border-2 border-white text-white flex justify-center items-center hover:shadow-2xl duration-200">Войти</Link>
                 }
 
             </div>
